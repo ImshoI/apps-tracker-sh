@@ -30,7 +30,19 @@ for arg in "$@"; do
   esac
 done
 
-phone_pattern='(\+[0-9]{1,3}[ .-]?)?\(?[0-9]{2,4}\)?[ .-][0-9]{3,4}[ .-][0-9]{3,4}|\+[0-9]{8,}'
+
+write_b64() {
+  python3 - "$1" << 'PY'
+import base64, pathlib, sys
+path = pathlib.Path(sys.argv[1])
+out = path.with_name(path.name + ".b64")
+out.write_bytes(base64.b64encode(path.read_bytes()))
+print(f"Wrote {out}")
+PY
+}
+
+phone_pattern=
+'(\+[0-9]{1,3}[ .-]?)?\(?[0-9]{2,4}\)?[ .-][0-9]{3,4}[ .-][0-9]{3,4}|\+[0-9]{8,}'
 
 copy_resume() {
   local id="$1" src="$2"
@@ -50,7 +62,9 @@ copy_resume() {
   mkdir -p "$ROOT/resumes/$id"
   cp "$src" "$dest"
   echo "Copied resume -> resumes/$id/resume.pdf"
+  write_b64 "$dest"
 }
+
 
 copy_screenshot() {
   local id="$1" src="$2"
@@ -80,7 +94,9 @@ im.save(dest, "WEBP", quality=82, method=6)
 print(f"Wrote screenshot -> {dest}")
 PY
   echo "Note: check the screenshot for phone numbers, email, address, or salary asks before pushing."
+  write_b64 "$dest"
 }
+
 
 if [[ -n "$RECORD" ]]; then
   if [[ ! -f "$RECORD" ]]; then

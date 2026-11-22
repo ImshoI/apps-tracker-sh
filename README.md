@@ -40,3 +40,5 @@ A record looks like:
 `resumeSource` and `screenshotSource` are local paths used only by the script. Screenshots are resized (max width 1200px) and saved as WebP. Do not put phone numbers, personal email, home address, or salary asks into the JSON or into screenshots.
 
 The script refuses to copy a resume PDF if `pdftotext` finds a phone number in it.
+
+Resumes and screenshots are stored in git as `.b64` text sidecars so they can be updated without a binary git push. `./update.sh` writes those files automatically. To reconstruct the PDFs and WebP images locally after a clone, run `./scripts/decode-assets.sh`. GitHub Pages decodes them during deploy.
