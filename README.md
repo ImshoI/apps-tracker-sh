@@ -28,7 +28,7 @@ A record looks like:
   "country": "UK or USA",
   "pay": "Pay as posted",
   "appliedVia": "Company site form | Jobvite | Lever | Zoho Recruit | Email draft | LinkedIn",
-  "status": "Prepared | Submitted | Email draft for owner | Posting removed | Interview | Rejected | Offer",
+  "status": "Prepared | Submitted | Email draft for owner | Blocked – owner to apply | Posting removed | Interview | Rejected | Offer",
   "date": "2026-11-22",
   "jobUrl": "https://...",
   "notes": "Optional",

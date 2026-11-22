@@ -3,6 +3,7 @@ const STATUS_ORDER = [
   "Submitting",
   "Submitted",
   "Email draft for owner",
+  "Blocked – owner to apply",
   "Posting removed",
   "Interview",
   "Rejected",
@@ -190,7 +191,7 @@ function renderTable(items) {
 function updateSummary(items) {
   els.total.textContent = String(items.length);
   els.submitted.textContent = String(items.filter((item) => item.status === "Submitted").length);
-  els.waiting.textContent = String(items.filter((item) => item.status === "Email draft for owner").length);
+  els.waiting.textContent = String(items.filter((item) => item.status === "Email draft for owner" || item.status === "Blocked – owner to apply").length);
 }
 
 function setView(view) {
