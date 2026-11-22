@@ -89,13 +89,13 @@
       "location": "London, UK",
       "country": "UK",
       "pay": "Negotiable plus bonus",
-      "appliedVia": "Email draft",
-      "status": "Email draft for owner",
+      "appliedVia": "Email",
+      "status": "Submitted",
       "date": "2026-11-22",
       "jobUrl": "https://stone-circle.com/job-opportunities/project-managerquantity-surveyor",
       "resume": "resumes/stonecircle/resume.pdf",
       "screenshot": "",
-      "notes": "Apply by emailing a CV and cover letter. Draft is with the owner to send."
+      "notes": "Emailed by Shoaib"
     },
     {
       "id": "earthworks-stone",
@@ -105,13 +105,13 @@
       "location": "Missouri / Illinois, USA",
       "country": "USA",
       "pay": "Not stated",
-      "appliedVia": "Email draft",
-      "status": "Email draft for owner",
+      "appliedVia": "Email",
+      "status": "Submitted",
       "date": "2026-11-22",
       "jobUrl": "https://earthworksstone.com/blog/career/limestone-draftsman/",
       "resume": "resumes/earthworks-stone/resume.pdf",
       "screenshot": "",
-      "notes": "Apply by emailing a resume and portfolio. Draft is with the owner to send."
+      "notes": "Emailed by Shoaib"
     },
     {
       "id": "past-scp-consulting-draftsperson",
