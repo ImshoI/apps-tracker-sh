@@ -311,9 +311,9 @@ h1 {
 
 .date { color: var(--muted); font-size: 0.9rem; white-space: nowrap; }
 
-.status-submitted, .status-offer { background: var(--pine-soft); color: var(--pine); }
+.status-submitted, .status-applied, .status-offer { background: var(--pine-soft); color: var(--pine); }
 .status-prepared, .status-submitting { background: var(--slate-soft); color: var(--slate); }
-.status-email-draft-for-owner, .status-blocked-owner-to-apply { background: var(--amber-soft); color: var(--amber); }
+.status-email-draft-for-owner, .status-blocked-owner-to-apply, .status-not-processed { background: var(--amber-soft); color: var(--amber); }
 .status-posting-removed, .status-rejected { background: var(--rose-soft); color: var(--rose); }
 .status-interview { background: #dce6f4; color: #2c4a74; }
 
