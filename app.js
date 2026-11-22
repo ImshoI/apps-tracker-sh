@@ -2,8 +2,10 @@ const STATUS_ORDER = [
   "Prepared",
   "Submitting",
   "Submitted",
+  "Applied",
   "Email draft for owner",
   "Blocked – owner to apply",
+  "Not processed",
   "Posting removed",
   "Interview",
   "Rejected",
@@ -75,6 +77,13 @@ function populateFilters(items) {
 
   els.status.innerHTML = '<option value="">All statuses</option>' +
     options.map((status) => `<option value="${escapeHtml(status)}">${escapeHtml(status)}</option>`).join("");
+
+  const countryOrder = ["UK", "USA", "UAE", "Australia"];
+  const countries = unique(items.map((item) => item.country));
+  const countryOptions = countryOrder.filter((country) => countries.includes(country))
+    .concat(countries.filter((country) => !countryOrder.includes(country)).sort());
+  els.country.innerHTML = '<option value="">All countries</option>' +
+    countryOptions.map((country) => `<option value="${escapeHtml(country)}">${escapeHtml(country)}</option>`).join("");
 
   const roleTypes = unique(items.map((item) => item.roleType)).sort();
   els.role.innerHTML = '<option value="">All role types</option>' +
@@ -205,7 +214,7 @@ function renderTable(items) {
 
 function updateSummary(items) {
   els.total.textContent = String(items.length);
-  els.submitted.textContent = String(items.filter((item) => item.status === "Submitted").length);
+  els.submitted.textContent = String(items.filter((item) => item.status === "Submitted" || item.status === "Applied").length);
   els.waiting.textContent = String(items.filter((item) => item.status === "Email draft for owner" || item.status === "Blocked – owner to apply").length);
 }
 
