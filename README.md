@@ -42,3 +42,9 @@ A record looks like:
 The script refuses to copy a resume PDF if `pdftotext` finds a phone number in it.
 
 Resumes and screenshots are stored in git as `.b64` text sidecars so they can be updated without a binary git push. `./update.sh` writes those files automatically. To reconstruct the PDFs and WebP images locally after a clone, run `./scripts/decode-assets.sh`. GitHub Pages decodes them during deploy.
+
+## GitHub Pages
+
+The site is meant to go live at https://imshoi.github.io/apps-tracker-sh/. GitHub Actions cannot turn Pages on for this repository (`Resource not accessible by integration`), so it needs a one-time enable in the repo settings: Pages → Build and deployment → Source: GitHub Actions. After that, each push to `main` deploys automatically.
+
+If you prefer branch publishing instead, choose Source: Deploy from a branch, branch `main`, folder `/ (root)`. Resumes and confirmation screenshots still open, because the page can decode the `.b64` sidecars in the browser.
