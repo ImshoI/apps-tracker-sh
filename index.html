@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="description" content="A private record of prepared and submitted applications.">
+  <title>Applications</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#results">Skip to results</a>
+  <header class="site-header">
+    <div class="wrap">
+      <p class="mark" aria-hidden="true">A</p>
+      <div class="heading">
+        <h1>Applications</h1>
+        <p class="lede">A private record of roles prepared and submitted. This page is not indexed.</p>
+      </div>
+      <p class="updated" id="updated" hidden></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="summary" aria-label="Summary counts">
+      <article class="stat">
+        <p class="stat-value" id="count-total">0</p>
+        <p class="stat-label">Total</p>
+      </article>
+      <article class="stat">
+        <p class="stat-value" id="count-submitted">0</p>
+        <p class="stat-label">Submitted</p>
+      </article>
+      <article class="stat">
+        <p class="stat-value" id="count-waiting">0</p>
+        <p class="stat-label">Waiting on owner</p>
+      </article>
+    </section>
+
+    <section class="toolbar" aria-label="Search and filters">
+      <label class="search">
+        <span class="sr-only">Search</span>
+        <input id="search" type="search" placeholder="Search company, role, location…" autocomplete="off">
+      </label>
+      <div class="filters">
+        <label>
+          <span>Status</span>
+          <select id="filter-status">
+            <option value="">All statuses</option>
+          </select>
+        </label>
+        <label>
+          <span>Country</span>
+          <select id="filter-country">
+            <option value="">All countries</option>
+            <option value="UK">UK</option>
+            <option value="USA">USA</option>
+          </select>
+        </label>
+        <label>
+          <span>Role type</span>
+          <select id="filter-role">
+            <option value="">All role types</option>
+          </select>
+        </label>
+        <label>
+          <span>Sort</span>
+          <select id="sort">
+            <option value="date-desc">Date (newest)</option>
+            <option value="date-asc">Date (oldest)</option>
+            <option value="company">Company (A–Z)</option>
+            <option value="status">Status</option>
+          </select>
+        </label>
+      </div>
+      <div class="view-toggle" role="group" aria-label="Layout">
+        <button type="button" id="view-cards" class="is-active" aria-pressed="true">Cards</button>
+        <button type="button" id="view-table" aria-pressed="false">Table</button>
+      </div>
+    </section>
+
+    <p class="result-meta" id="result-meta"></p>
+    <section id="results" class="results view-cards" aria-live="polite"></section>
+  </main>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close">Close</button>
+    <img id="lightbox-image" alt="">
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Not for public listing. Links go to the original posting, a tailored resume, and a confirmation screenshot when one exists.</p>
+    </div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
