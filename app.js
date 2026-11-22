@@ -122,16 +122,31 @@ function sortItems(items, sort) {
   return copy;
 }
 
+async function loadAssetUrl(path) {
+  let response = await fetch(path);
+  if (response.ok) {
+    const blob = await response.blob();
+    return URL.createObjectURL(blob);
+  }
+  response = await fetch(path + ".b64");
+  if (!response.ok) throw new Error("Could not open file");
+  const binary = atob((await response.text()).replace(/\s+/g, ""));
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+  const type = path.endsWith(".pdf") ? "application/pdf" : path.endsWith(".webp") ? "image/webp" : "application/octet-stream";
+  return URL.createObjectURL(new Blob([bytes], { type }));
+}
+
 function linkButtons(item) {
   const parts = [];
   if (item.jobUrl) {
     parts.push(`<a href="${escapeHtml(item.jobUrl)}" target="_blank" rel="noopener noreferrer">Posting</a>`);
   }
   if (item.resume) {
-    parts.push(`<a href="${escapeHtml(item.resume)}" target="_blank" rel="noopener noreferrer">Resume</a>`);
+    parts.push(`<button type="button" data-asset="${escapeHtml(item.resume)}" data-kind="resume" data-label="${escapeHtml(item.company + " resume")}">Resume</button>`);
   }
   if (item.screenshot) {
-    parts.push(`<button type="button" data-screenshot="${escapeHtml(item.screenshot)}" data-label="${escapeHtml(item.company + " confirmation")}">Confirmation</button>`);
+    parts.push(`<button type="button" data-asset="${escapeHtml(item.screenshot)}" data-kind="screenshot" data-label="${escapeHtml(item.company + " confirmation")}">Confirmation</button>`);
   }
   return parts.length ? `<div class="links">${parts.join("")}</div>` : "";
 }
@@ -233,10 +248,20 @@ function closeLightbox() {
   els.lightboxImage.src = "";
 }
 
-els.results.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-screenshot]");
+els.results.addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-asset]");
   if (!button) return;
-  openLightbox(button.getAttribute("data-screenshot"), button.getAttribute("data-label"));
+  const path = button.getAttribute("data-asset");
+  const label = button.getAttribute("data-label") || "";
+  const kind = button.getAttribute("data-kind");
+  try {
+    const url = await loadAssetUrl(path);
+    if (kind === "screenshot") openLightbox(url, label);
+    else window.open(url, "_blank", "noopener,noreferrer");
+  } catch (error) {
+    button.textContent = "Unavailable";
+    button.disabled = true;
+  }
 });
 
 els.lightboxClose.addEventListener("click", closeLightbox);
